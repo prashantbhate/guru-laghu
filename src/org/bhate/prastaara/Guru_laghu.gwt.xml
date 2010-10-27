@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='guru_laghu'>
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name="com.google.gwt.uibinder.UiBinder" />
+  <inherits name='com.google.gwt.user.theme.standard.Standard' />
+  <inherits name='com.google.gwt.language.Language' />
+  <entry-point class='org.bhate.prastaara.client.Guru_laghu' />
+  <source path='client' />
+  <source path='shared' />
+  <source path='test/gwt'/>
+
+</module>

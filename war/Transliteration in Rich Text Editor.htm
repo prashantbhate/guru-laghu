@@ -1,0 +1,92 @@
+
+<!-- saved from url=(0083)http://code.google.com/apis/ajaxlanguage/documentation/richedittransliteration.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Transliteration in Rich Text Editor</title>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      // Load the Google Transliteration API
+      google.load("elements", "1", {
+            packages: ["transliteration","keyboard"]
+          });
+      function onLoad() {
+        var options = {
+            sourceLanguage:
+                google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage: ['kn','hi','ml','ta','te'],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+
+         var kbd = new google.elements.keyboard.Keyboard( ['kn_phone'],
+          ['chand']);
+         kbd.setVisible(true);
+
+
+        // Create an instance on TransliterationControl with the required
+        // options.
+        var control =
+            new google.elements.transliteration.TransliterationControl(options);
+
+        // Enable transliteration in the editable DIV with id
+        // 'transliterateDiv'.
+        control.makeTransliteratable(['transliterateDiv']);
+}
+google.setOnLoadCallback(onLoad);
+function f(){
+document.getElementById('chand').innerHTML=guruLaghu(document.getElementById('transliterateDiv').value)
+}
+function guruLaghu(s){
+	var re = /(?:(?:([ಅಇಉಋಎಒ])|([ಆಈಊೠಌೡಏಐಓಔ]))([ಂಃ])?)|(?:(?:((?:[ಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಱಲವಶಷಸಹಳೞ]್){1,4})?(?:([ಕಗಚಜಟಡತದಪಬ])|([ಖಘಛಝಠಢಥಧಫಭ])|([ಙಞಣನಮ])|([ಯರಱಲವಶಷಸಹಳೞ]))(?:(?:(?:([ಿುೃೆೊ])|([ಾೀೂೄೇೈೋೌೕೖ]))?([ಂಃ])?|([್]))?)))|([ ]+)|((?:\r?\n)+)/g
+	var sr1="";
+	var sr2="";
+	var sr="";
+	
+	var i=0;
+	while(true){
+		var m = re.exec(s);
+		if (m == null) {
+			break;    
+		} else {
+			var p=null;
+			if(m[2]!=null || m[3]!=null || m[10]!=null ||m[11]!=null  ){
+				p="-";
+			} else if (m[14]!=null){
+				if(sr1!=null)sr+="<tr>"+sr1+'<tr/>'
+				if(sr2!=null)sr+='<tr>'+sr2+'</tr>'
+				sr1="";
+				sr2="";
+			}else if (m[13]!=null){
+				p=" ";
+			}else if (m[12]==null){
+				p="U";
+			}
+			if(p!=null){
+			sr1+="<td>"+p+"</td>";
+			sr2+="<td>"+m[0]+"</td>";
+			}
+		}       
+	}
+	if(sr1!=null)sr+="<tr>"+sr1+'<tr/>'
+	if(sr2!=null)sr+='<tr>'+sr2+'</tr>'
+	return "<table border='1'>"+sr+"</table>";
+}
+    </script>
+</head>
+<body>
+
+<br>
+<textarea id="transliterateDiv"
+	style="width: 600px; height: 200px; border: 1px solid; overflow-y: scroll"
+	dir="ltr" onkeyup="f()" onchange="f()"></textarea>
+<div id="chand"
+	style="font-family: 'Courier New' Courier monospace; width: 600px; height: 200px; border: 1px solid; overflow-y: scroll"></div>
+
+
+
+
+
+</body>
+</html>
