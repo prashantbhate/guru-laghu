@@ -8,6 +8,16 @@
 }
 
 /** Add css rules here for your application. */
+
+h1 {
+	font-size: 4em;
+	font-weight: bold;
+	color: #777777;
+	margin: 2px 0px 1px;
+	text-align: center;
+}
+
+
 .ftrow {
 	border-collapse: collapse;
 }
@@ -57,3 +67,6 @@
 .fixed{
 	table-layout: fixed;
 }
+.gwt-StackLayoutPanelHeader {
+font-weight: normal !important;			
+			}

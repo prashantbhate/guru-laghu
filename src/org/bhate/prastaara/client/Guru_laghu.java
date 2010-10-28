@@ -3,71 +3,46 @@ package org.bhate.prastaara.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.language.client.LanguageUtils;
-import com.google.gwt.language.client.transliteration.control.TransliterationControl;
-import com.google.gwt.language.client.transliteration.control.TransliterationControlOptions;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class Guru_laghu implements EntryPoint {
-/*
-  interface Binder extends UiBinder<DockLayoutPanel, Guru_laghu> {
-  }
-  private static final Binder binder = GWT.create(Binder.class);
-
-  @UiField
-  RichTextArea transltextarea;
-  @UiField
-  Button button;
-  @UiField
-  HTML tc;
-  @UiField
-  FlexTable resultings;
-  @UiField
-  FlexTable ganawings;
-*/
-  /*
-  public void onModuleLoad1() {
-    DockLayoutPanel outer = binder.createAndBindUi(this);
-    Window.enableScrolling(false);
-    Window.setMargin("0px");
-    RootLayoutPanel root = RootLayoutPanel.get();
-    root.add(outer);
-
-    MyHandler handler = new MyHandler(greetingService, transltextarea, resultings, ganawings);
-    transltextarea.addKeyUpHandler(handler);
-    transltextarea.addKeyPressHandler(handler);
-    button.addClickHandler(handler);
-    initTransliterationControls(tc, transltextarea);
-  }
-*/
   public void onModuleLoad() {
     HandlerManager eventBus = new HandlerManager(null);
     AppController appViewer = new AppController(rpcService, eventBus);
-    appViewer.go(RootPanel.get());
+    Window.enableScrolling(false);
+    Window.setMargin("0px");
+    appViewer.go(RootLayoutPanel.get());
   }
-  
+
   private final GreetingServiceAsync rpcService = GWT.create(GreetingService.class);
 
-  private void initTransliterationControls(final HTML div, final RichTextArea transltextarea) {
-
-    LanguageUtils.loadTransliteration(new Runnable() {
-      public void run() {
-        String[] dest = { "kn", "hi" /* //for future"hi", "ml", "ta", "te" */};
-        TransliterationControlOptions options = TransliterationControlOptions.newInstance("en", dest, true, "ctrl+g");
-        TransliterationControl control = TransliterationControl.newInstance(options);
-
-        control.showControl(div);
-        control.makeTransliteratable(transltextarea);
-        transltextarea.setWidth("100%");
-        transltextarea.setHeight("100%");
-      }
-    });
-
-  }
-
 }
+/*
+ * interface Binder extends UiBinder<DockLayoutPanel, Guru_laghu> { } private
+ * static final Binder binder = GWT.create(Binder.class);
+ * 
+ * @UiField RichTextArea transltextarea;
+ * 
+ * @UiField Button button;
+ * 
+ * @UiField HTML tc;
+ * 
+ * @UiField FlexTable resultings;
+ * 
+ * @UiField FlexTable ganawings;
+ */
+/*
+ * public void onModuleLoad1() { DockLayoutPanel outer =
+ * binder.createAndBindUi(this); Window.enableScrolling(false);
+ * Window.setMargin("0px"); RootLayoutPanel root = RootLayoutPanel.get();
+ * root.add(outer);
+ * 
+ * MyHandler handler = new MyHandler(greetingService, transltextarea,
+ * resultings, ganawings); transltextarea.addKeyUpHandler(handler);
+ * transltextarea.addKeyPressHandler(handler); button.addClickHandler(handler);
+ * initTransliterationControls(tc, transltextarea); }
+ */
 /*
  * public void onModuleLoad1() {
  * 
